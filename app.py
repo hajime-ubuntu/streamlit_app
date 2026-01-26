@@ -1,11 +1,39 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+import matplotlib.pyplot as plt
 
 st.title('国勢調査')
 
 df = pd.read_csv('kokusei.csv')
 
 with st.sidebar:
+    option = st.radio('見たい結果を選択してください',
+                      ['人口推移','人口比較'])
     selected_prefectures = st.multiselect('都道府県を選択してください',
-             ['全国','北海道','青森県','岩手県','宮城県','秋田県','山形県','福島県','茨城県','栃木県','群馬県','埼玉県','千葉県','東京都','神奈川県','新潟県','富山県','石川県','福井県','山梨県','長野県','岐阜県','静岡県','愛知県','三重県','滋賀県','京都府','大阪府','兵庫県','奈良県','和歌山県','鳥取県','島根県','岡山県','広島県','山口県','徳島県','香川県','愛媛県','高知県','福岡県','佐賀県','長崎県','熊本県','大分県','宮崎県','鹿児島県','沖縄県'])
+                                          df['都道府県名'].unique())
+    selected_label = st.selectbox('性別を選択してください',
+                                    ['男','女','男＆女'])
+    if selected_label == '男':
+         selected_sex = '人口（男）'
+    elif selected_label == '女':
+         selected_sex = '人口（女）'
+    elif selected_label == '男＆女':
+        selected_sex = '人口（総数）'
+    
+    if option == '人口比較':
+         selected_year = st.selectbox('年を選択してください',
+                                        df['西暦（年）'].unique())
+
+df = df[df['都道府県名'].isin(selected_prefectures)]
+if option == '人口比較':
+     df = df[df['西暦（年）'] == selected_year]
+
+if option == '人口推移':
+     fig = px.line(df,
+                      x='西暦（年）',
+                      y=selected_sex,
+                      color='都道府県名',
+                      labels={'人口（男）':'人口(男) 単位：人','西暦（年）':'西暦(年) 単位：年'},  
+                      title = f'{selected_sex}の人口推移')
+     st.plotly_chart(fig)
