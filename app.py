@@ -34,6 +34,6 @@ if option == '人口推移':
                       x='西暦（年）',
                       y=selected_sex,
                       color='都道府県名',
-                      labels={'人口（男）':'人口(男) 単位：人','西暦（年）':'西暦(年) 単位：年'},  
+                      labels={selected_sex:'人口 単位：人','西暦（年）':'西暦(年) 単位：年'},  
                       title = f'{selected_sex}の人口推移')
      st.plotly_chart(fig)
