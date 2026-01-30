@@ -31,9 +31,17 @@ if option == '人口比較':
 
 if option == '人口推移':
      fig = px.line(df,
-                      x='西暦（年）',
-                      y=selected_sex,
-                      color='都道府県名',
-                      labels={selected_sex:'人口 単位：人','西暦（年）':'西暦(年) 単位：年'},  
-                      title = f'{selected_sex}の人口推移')
+                   x='西暦（年）',
+                   y=selected_sex,
+                   color='都道府県名',
+                   labels={selected_sex:'人口 単位：人','西暦（年）':'西暦(年) 単位：年'},  
+                   title = f'{selected_sex}の人口推移')
+     st.plotly_chart(fig)
+
+if option == '人口比較':
+     fig = px.bar(df,
+                   x='都道府県名',
+                   y=selected_sex,
+                   labels={selected_sex:'人口 単位：人','都道府県名':''},
+                   title = f'{selected_sex}の都道府県別人口比較')
      st.plotly_chart(fig)
