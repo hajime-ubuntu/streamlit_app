@@ -4,6 +4,8 @@ import plotly.express as px
 import matplotlib.pyplot as plt
 
 st.title('国勢調査')
+st.text('このアプリは国勢調査の結果を指定した条件で表示します')
+st.text('左のサイドバーから条件を指定してください')
 st.divider()
 
 df = pd.read_csv('kokusei.csv')
