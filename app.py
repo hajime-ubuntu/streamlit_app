@@ -4,12 +4,14 @@ import plotly.express as px
 import matplotlib.pyplot as plt
 
 st.title('国勢調査')
+st.divider()
 
 df = pd.read_csv('kokusei.csv')
 
 with st.sidebar:
     option = st.radio('見たい結果を選択してください',
                       ['人口推移','人口比較'])
+    st.divider()
     selected_prefectures = st.multiselect('都道府県を選択してください',
                                           df['都道府県名'].unique())
     selected_label = st.selectbox('性別を選択してください',
