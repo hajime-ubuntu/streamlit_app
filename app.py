@@ -26,10 +26,16 @@ with st.sidebar:
     if option == '人口比較':
          selected_year = st.selectbox('年を選択してください',
                                         df['西暦（年）'].unique())
+     
+    st.info('条件を変えると自動でグラフが更新されます。')
 
 df = df[df['都道府県名'].isin(selected_prefectures)]
 if option == '人口比較':
      df = df[df['西暦（年）'] == selected_year]
+
+if not selected_prefectures:
+    st.warning('左側のサイドバーから都道府県を選択してください。')
+    st.stop()
 
 if option == '人口推移':
      fig = px.line(df,
@@ -48,3 +54,6 @@ if option == '人口比較':
                    labels={selected_sex:'人口 単位：人','都道府県名':''},
                    title = f'{selected_year}年：{selected_sex}の都道府県別人口比較')
      st.plotly_chart(fig)
+
+st.caption('出典：総務省統計局「国勢調査」のデータを使用して作成')
+st.dataframe(df)
