@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
-import matplotlib.pyplot as plt
 
 st.title('国勢調査結果比較アプリ')
 st.text('このアプリは国勢調査の結果を指定した条件で表示します')
