@@ -3,12 +3,12 @@ import pandas as pd
 import plotly.express as px
 import matplotlib.pyplot as plt
 
-st.title('国勢調査')
+st.title('国勢調査結果比較アプリ')
 st.text('このアプリは国勢調査の結果を指定した条件で表示します')
 st.text('左のサイドバーから条件を指定してください')
 st.divider()
 
-df = pd.read_csv('kokusei.csv')
+df = pd.read_csv('c01.csv')
 
 with st.sidebar:
     option = st.radio('見たい結果を選択してください',
